@@ -1,8 +1,9 @@
 module ActionController
   class Base
     class << self
+      
       def dojox_rails_store(options={})
-        before_filter :fix_json_params
+        before_filter :namespace_generic_json_params_to_controller
 
         cattr_accessor :rails_store_pagination_options
         self.rails_store_pagination_options = options
@@ -24,19 +25,19 @@ module ActionController
         when 'scaffold'
           scaffold_rails_store(options)
         end
-
-        private
-
-        def fix_json_params
-          if data = params.delete(:_json)
-            name = controller_name
-            name = name.to_s.singularize unless data.is_a?(Array)
-            params.update(name=>data)
-          end
-        end
-
       end
-      
+
     end
+
+    private
+
+    def namespace_generic_json_params_to_controller
+      if data = params.delete(:_json)
+        name = controller_name
+        name = name.to_s.singularize unless data.is_a?(Array)
+        params.update(name=>data)
+      end
+    end
+    
   end
 end
