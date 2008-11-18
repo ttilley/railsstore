@@ -19,6 +19,8 @@ module ResourceController
           render :json => object
         end
         
+        create.flash nil
+        
         create.failure.wants.json do
           render :json => object.errors, :status => :unprocessable_entity
         end
@@ -27,6 +29,8 @@ module ResourceController
           render :json => object
         end
         
+        update.flash nil
+        
         update.failure.wants.json do
           render :json => object.errors, :status => :unprocessable_entity
         end
@@ -34,6 +38,8 @@ module ResourceController
         destroy.wants.json do
           head :ok
         end
+        
+        destroy.flash nil
         
         destroy.failure.wants.json do
           head :unprocessable_entity
