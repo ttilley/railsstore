@@ -23,6 +23,8 @@ module RailsStore
       
       if params[:onePage] == 'true'
         content_range = collection_object.length
+      elsif collection_object.respond_to?(:total_entries)
+        content_range = collection_object.total_entries
       else
         content_range = model_object.count
       end
