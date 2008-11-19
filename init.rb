@@ -1,10 +1,10 @@
-require 'param_parser'
-require 'iso_json'
+require 'rs_param_parser'
+require 'rs_iso_json'
 
-require 'abstract_accessors'
-require 'range_header'
-require 'will_paginate'
-require 'sorting'
+require 'rs_abstract_accessors'
+require 'rs_range_header'
+require 'rs_will_paginate'
+require 'rs_sorting'
 
 case ActionController.restful_subsystem
 when 'resource_controller'
@@ -15,4 +15,4 @@ when 'scaffold'
   require 'scaffold_rails_store'
 end
 
-require 'base'
+require 'rs_base'
