@@ -88,8 +88,8 @@ module Resourceful
       options = rails_store_range_header(options)
       RAILS_DEFAULT_LOGGER.debug(options.to_json) if RAILS_DEFAULT_LOGGER.debug?
       
-      # options = rails_store_will_paginate(options)
-      # RAILS_DEFAULT_LOGGER.debug(options.to_json) if RAILS_DEFAULT_LOGGER.debug?
+      options = rails_store_will_paginate(options)
+      RAILS_DEFAULT_LOGGER.debug(options.to_json) if RAILS_DEFAULT_LOGGER.debug?
       
       options = rails_store_sorting(options)
       RAILS_DEFAULT_LOGGER.debug(options.to_json) if RAILS_DEFAULT_LOGGER.debug?

@@ -9,10 +9,10 @@ module RailsStore
         pstart = 0 if pstart.blank?
         pend = pstart.to_i + 9 if pend.blank?
         
-        limit = (pend.to_i - pstart.to_i).abs + 1
-                
         options[:offset] = pstart.to_i unless pstart.to_i == 0
-        options[:limit] = limit
+        unless pend == 'Infinity'
+          options[:limit] = (pend.to_i - pstart.to_i).abs + 1
+        end
       end
       
       return options

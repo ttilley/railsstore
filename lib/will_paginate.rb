@@ -3,8 +3,11 @@ module RailsStore
     private
     
     def rails_store_will_paginate(options={})
-      if params[:page] and (params[:per_page] != 'Infinity')
+      if params[:page] &&
+              (params[:per_page] != 'Infinity' && params[:page] != 0)
+        
         options[:finder] = :paginate
+        
         options[:page] = params[:page]
         options[:per_page] = params[:per_page]
         
