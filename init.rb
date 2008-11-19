@@ -3,6 +3,7 @@ require 'iso_json'
 
 require 'abstract_accessors'
 require 'range_header'
+require 'will_paginate'
 require 'sorting'
 
 case ActionController.restful_subsystem

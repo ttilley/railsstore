@@ -10,6 +10,7 @@ module ActionController
 
         include RailsStore::AbstractAccessors
         include RailsStore::RangeHeader
+        include RailsStore::WillPaginate
         include RailsStore::Sorting
 
         case ActionController.restful_subsystem
@@ -26,7 +27,7 @@ module ActionController
           scaffold_rails_store(options)
         end
       end
-
+      
     end
 
     private

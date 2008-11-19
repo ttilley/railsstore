@@ -15,8 +15,6 @@ module RailsStore
         options[:limit] = limit
       end
       
-      options[:limit] ||= 10
-      
       return options
     end
     

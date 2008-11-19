@@ -81,8 +81,25 @@ module Resourceful
   module DojoPagination
     def current_objects
       return @current_objects if defined?(@current_objects)
-      options = rails_store_sorting(rails_store_range_header(self.class.rails_store_pagination_options))
-      @current_objects = current_model.find(:all, options)
+      
+      options = self.class.rails_store_pagination_options
+      RAILS_DEFAULT_LOGGER.debug(options.to_json) if RAILS_DEFAULT_LOGGER.debug?
+      
+      options = rails_store_range_header(options)
+      RAILS_DEFAULT_LOGGER.debug(options.to_json) if RAILS_DEFAULT_LOGGER.debug?
+      
+      # options = rails_store_will_paginate(options)
+      # RAILS_DEFAULT_LOGGER.debug(options.to_json) if RAILS_DEFAULT_LOGGER.debug?
+      
+      options = rails_store_sorting(options)
+      RAILS_DEFAULT_LOGGER.debug(options.to_json) if RAILS_DEFAULT_LOGGER.debug?
+            
+      finder = options.delete(:finder) || :find
+      if finder != :find then
+        @current_objects = current_model.send(finder, options)
+      else
+        @current_objects = current_model.send(finder, :all, options)
+      end
     end
   end
 end
