@@ -53,17 +53,10 @@ module ResourceController
     def collection
       return @collection if defined?(@collection)
       
-      options = self.class.rails_store_pagination_options
-      RAILS_DEFAULT_LOGGER.debug(options.to_json) if RAILS_DEFAULT_LOGGER.debug?
-      
-      options = rails_store_range_header(options)
-      RAILS_DEFAULT_LOGGER.debug(options.to_json) if RAILS_DEFAULT_LOGGER.debug?
-      
-      options = rails_store_will_paginate(options)
-      RAILS_DEFAULT_LOGGER.debug(options.to_json) if RAILS_DEFAULT_LOGGER.debug?
-      
+      options = self.class.rails_store_pagination_options.clone      
+      options = rails_store_range_header(options)      
+      options = rails_store_will_paginate(options)      
       options = rails_store_sorting(options)
-      RAILS_DEFAULT_LOGGER.debug(options.to_json) if RAILS_DEFAULT_LOGGER.debug?
       
       finder = options.delete(:finder) || :find
       if finder != :find then
